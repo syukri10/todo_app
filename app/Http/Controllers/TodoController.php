@@ -19,7 +19,7 @@ class TodoController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
@@ -27,7 +27,28 @@ class TodoController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        // Validate the request data
+        $request->validate([
+            'task' => 'required|string|max:255', 
+            'description' => 'nullable|string',
+        ]);
+
+        $task = $request->input('task'); 
+        $description = $request->input('description');
+        $todos = session('todos', []);
+
+        // Make sure the latest task is on top
+        array_unshift($todos, [
+            'task' => $task,
+            'description' => $description,
+            'created_at' => now()->toDateTimeString(),
+        ]);
+
+        // Store the updated task back in the session
+        session(['todos' => $todos]); 
+
+        return redirect()->route('todo.index');
+
     }
 
     /**
