@@ -101,3 +101,17 @@
 
 </body>
 </html>
+
+{{-- clear the session data using JavaScript when the tab is closed --}}
+<script>
+    window.addEventListener('beforeunload', function () {
+        fetch('/clear-session', {
+            method: 'POST',
+            headers: {
+                'X-CSRF-TOKEN': '{{ csrf_token() }}',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ action: 'clear' })
+        });
+    });
+</script>
