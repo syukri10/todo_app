@@ -32,5 +32,12 @@
 <body>
     <h1>My TODO List</h1>
 
+    <form action="{{ route('todo.store') }}" method="POST">
+        @csrf
+        <input type="text" name="task" placeholder="Task Title?" required>
+        <input type="text" name="description" placeholder="Task Description?" required>
+        <button type="submit">Add</button>
+    </form>
+
 </body>
 </html>
