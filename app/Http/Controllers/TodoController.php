@@ -11,7 +11,9 @@ class TodoController extends Controller
      */
     public function index()
     {
-        return view('todo.index');
+        $todos = session('todos', []);
+
+        return view('todo.index', compact('todos'));
     }
 
     /**
