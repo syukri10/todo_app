@@ -26,6 +26,53 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
         }
+        input[type="text"] {
+            flex: 1;
+            padding: 10px;
+            margin-right: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 1em 0;
+            text-align: right;
+        }
+        li {
+            background: #fff;
+            margin-bottom: 10px;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-direction: column;
+        }
+        li strong {
+            font-size: 1.1em;
+            color: #333;
+        }
+        li small {
+            color: #888;
+            font-size: 0.9em;
+        }
+        li p {
+            margin: 0.5em 0;
+            color: #555;
+        }
     </style>
     
 </head>
@@ -38,6 +85,19 @@
         <input type="text" name="description" placeholder="Task Description?" required>
         <button type="submit">Add</button>
     </form>
+
+    {{-- display all the task --}}
+    <ul>
+        @forelse ($todos as $todo)
+            <li>
+                <strong>Task: {{ $todo['task'] }}</strong> 
+                <p>Description: {{ $todo['description'] }}</p>
+                <small>Created at: {{ $todo['created_at'] }}</small>
+            </li>
+        @empty
+            <li>No tasks yet!</li>
+        @endforelse
+    </ul>
 
 </body>
 </html>
