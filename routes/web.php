@@ -8,9 +8,5 @@ Route::post('/store', [TodoController::class, 'store'])->name('todo.store');
 Route::get('/delete/{index}', [TodoController::class, 'destroy'])->name('todo.delete');
 Route::get('/edit/{index}', [TodoController::class, 'edit'])->name('todo.edit');
 Route::post('/update/{index}', [TodoController::class, 'update'])->name('todo.update');
-
-
-Route::post('/clear-session', function () {
-    session()->forget('todos');
-    return response()->noContent();
-});
+Route::post('/complete/{index}', [TodoController::class, 'toggleComplete'])->name('todo.complete');
+Route::post('/clear-session', function () {session()->forget('todos');return response()->noContent();});

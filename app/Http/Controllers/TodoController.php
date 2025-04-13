@@ -44,6 +44,7 @@ class TodoController extends Controller
             'task' => $task,
             'description' => $description,
             'created_at' => now()->toDateTimeString(),
+            'completed' => false,
         ]);
 
         // Store the updated task back in the session
@@ -109,4 +110,17 @@ class TodoController extends Controller
         }
         return redirect('/');
     }
+
+    public function toggleComplete($index)
+    {
+        $todos = session('todos', []);
+        
+        if (isset($todos[$index])) {
+            $todos[$index]['completed'] = !$todos[$index]['completed'];
+            session(['todos' => $todos]);
+        }
+
+        return redirect()->route('todo.index');
+    }
+    
 }
