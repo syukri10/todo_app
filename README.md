@@ -55,11 +55,15 @@ composer update
 
 ### 3️⃣ Copy Environment File
 
+Create a .env file based on the example:
+
 ```bash
 cp .env.example .env
 ```
 
 ### 4️⃣ Configure Session Settings
+
+Open your .env file and update the following lines:
 
 ```bash
 SESSION_DRIVER=file
