@@ -57,9 +57,13 @@
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
             display: flex;
-            justify-content: space-between;
-            align-items: flex-start;
-            flex-direction: column;
+            justify-content: space-between; 
+            align-items: center;
+            flex-direction: row;
+        }
+        li div {
+            flex-grow: 1; 
+            text-align: left; 
         }
         li strong {
             font-size: 1.1em;
@@ -72,6 +76,9 @@
         li p {
             margin: 0.5em 0;
             color: #555;
+        }
+        li form {
+            margin-left: auto;
         }
     </style>
     
@@ -88,11 +95,19 @@
 
     {{-- display all the task --}}
     <ul>
-        @forelse ($todos as $todo)
+        @forelse ($todos as $index => $todo)
             <li>
-                <strong>Task: {{ $todo['task'] }}</strong> 
-                <p>Description: {{ $todo['description'] }}</p>
-                <small>Created at: {{ $todo['created_at'] }}</small>
+                <div>
+                    <strong>Task: {{ $todo['task'] }}</strong> 
+                    <p>Description: {{ $todo['description'] }}</p>
+                    <small>Created at: {{ $todo['created_at'] }}</small>
+                </div>
+                <form action="{{ route('todo.delete', $index) }}" method="POST" style="display:inline;">
+                    @csrf
+                    <button type="submit" style="background-color:red; color:white; border:none; padding:5px 10px; border-radius:4px;">
+                        Delete
+                    </button>
+                </form>
             </li>
         @empty
             <li>No tasks yet!</li>

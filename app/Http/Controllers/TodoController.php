@@ -80,8 +80,14 @@ class TodoController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($index)
     {
-        //
+        $todos = session('todos', []);
+        if (isset($todos[$index])) {
+            unset($todos[$index]);
+            $todos = array_values($todos); 
+            session(['todos' => $todos]);
+        }
+        return redirect('/');
     }
 }
