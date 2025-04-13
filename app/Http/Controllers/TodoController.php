@@ -6,9 +6,6 @@ use Illuminate\Http\Request;
 
 class TodoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
         $todos = session('todos', []);
@@ -16,17 +13,6 @@ class TodoController extends Controller
         return view('todo.index', compact('todos'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
         // Validate the request data
@@ -54,17 +40,6 @@ class TodoController extends Controller
 
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit($index)
     {
         $todos = session('todos', []);
@@ -77,9 +52,6 @@ class TodoController extends Controller
         return view('todo.edit', ['task' => $task, 'index' => $index]);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
     public function update(Request $request, $index)
     {
         $request->validate([
@@ -97,9 +69,6 @@ class TodoController extends Controller
         return redirect('/');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
     public function destroy($index)
     {
         $todos = session('todos', []);
@@ -122,5 +91,5 @@ class TodoController extends Controller
 
         return redirect()->route('todo.index');
     }
-    
+
 }
