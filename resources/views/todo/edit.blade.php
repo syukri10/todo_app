@@ -65,7 +65,9 @@
     <form action="{{ route('todo.update', $index) }}" method="POST">
         <h1>Edit Task</h1>
         @csrf
+        <strong>Task:</strong>
         <input type="text" name="task" value="{{ $task['task'] }}" required>
+        <strong>Description:</strong>
         <input type="text" name="description" value="{{ $task['description'] }}" required>
         <button type="submit">Update</button>
         <a href="{{ url('/') }}">← Back to List</a>
