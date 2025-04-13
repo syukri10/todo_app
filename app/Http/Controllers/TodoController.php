@@ -64,17 +64,36 @@ class TodoController extends Controller
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit($index)
     {
-        //
+        $todos = session('todos', []);
+        $task = $todos[$index] ?? null;
+
+        if (!$task) {
+            return redirect('/');
+        }
+
+        return view('todo.edit', ['task' => $task, 'index' => $index]);
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $index)
     {
-        //
+        $request->validate([
+            'task' => 'required|string|max:255',
+            'description' => 'required|string|max:1000',
+        ]);
+    
+        $todos = session('todos', []);
+        if (isset($todos[$index])) {
+            $todos[$index]['task'] = $request->input('task');
+            $todos[$index]['description'] = $request->input('description');
+            session(['todos' => $todos]);
+        }
+    
+        return redirect('/');
     }
 
     /**

@@ -102,12 +102,13 @@
                     <p>Description: {{ $todo['description'] }}</p>
                     <small>Created at: {{ $todo['created_at'] }}</small>
                 </div>
-                <form action="{{ route('todo.delete', $index) }}" method="POST" style="display:inline;">
-                    @csrf
-                    <button type="submit" style="background-color:red; color:white; border:none; padding:5px 10px; border-radius:4px;">
-                        Delete
-                    </button>
-                </form>
+                <a href="{{ route('todo.delete', $index) }}" 
+                style="background-color:red; color:white; padding:5px 10px; border-radius:4px; text-decoration:none; margin-right: 4px;">
+                    Delete
+                </a>
+                <a href="{{ route('todo.edit', $index) }}">
+                    <button type="button">Edit</button>
+                </a>
             </li>
         @empty
             <li>No tasks yet!</li>
